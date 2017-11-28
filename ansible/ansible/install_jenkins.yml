@@ -1,0 +1,14 @@
+---
+- hosts: jenkinsserver
+  sudo: True
+  pre_tasks:
+   - name: install python
+     raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+  roles:
+   - geerlingguy.jenkins
+   - geerlingguy.docker
+
+  post_tasks:
+    - name: restart jenkins server
+      service: name=jenkins state=restarted
