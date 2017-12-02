@@ -7,7 +7,13 @@ services:
     environment:
       - COMMAND_OPTIONS=-master http://${JENKINS_IP}:8080 -username ${MASTER_USER:-admin} -password ${MASTER_PASS:-admin} -labels 'test' -executors 5
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /tmp:/tmp
+      - jm:/var/jenkins_home 
+      - jmshare:/usr/share/jenkins/ref
     deploy:
       replicas: 1
+
+volumes:
+  jm:
+    external: true
+  jmshare:
+    external: true
