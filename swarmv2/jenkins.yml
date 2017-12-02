@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  main:
+    image: josoder/jenkins:latest
+    ports:
+      - ${UI_PORT:-8080}:8080
+      - ${AGENTS_PORT:-50000}:50000
+    environment:
+      - JENKINS_OPTS="--prefix=/jenkins"
+    secrets:
+      - jenkins-user
+      - jenkins-pass
+	volumes:
+      - jm:/var/jenkins_home
+      - jmshare:/usr/share/jenkins/ref
+
+secrets:
+  jenkins-user:
+    external: true
+  jenkins-pass:
+    external: true
+
+volumes:
+  jm:
+    driver: cloudstor:aws
+    external: false
+  jmshare:
+    driver: cloudstor:aws
+    external: false
