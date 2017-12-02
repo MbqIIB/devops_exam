@@ -5,16 +5,20 @@ services:
   main:
     image: josoder/jenkins:latest
     ports:
-      - ${UI_PORT:-8080}:8080
-      - ${AGENTS_PORT:-50000}:50000
-    environment:
-      - JENKINS_OPTS="--prefix=/jenkins"
+      - "8080:8080"
+      - "50000:50000"
     secrets:
       - jenkins-user
       - jenkins-pass
     volumes:
       - jm:/var/jenkins_home
       - jmshare:/usr/share/jenkins/ref
+	deploy:
+      resources:
+        reservations:
+          memory: 500M
+        limits:
+          memory: 1000M	
 
 secrets:
   jenkins-user:
