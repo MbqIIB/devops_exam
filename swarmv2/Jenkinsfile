@@ -1,4 +1,4 @@
-node("test) {
+node('test') {
     def app
 	
     stage('clone') {
