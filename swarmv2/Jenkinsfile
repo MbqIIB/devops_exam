@@ -21,6 +21,13 @@ node('test') {
                     app.push("${env.BUILD_NUMBER}")
                                 app.push("latest")
                                 }
+    }   
+}
+
+node('production') {
+    stage('clone to production') {
+        checkout scm
     }
     
+    sh ('docker stack deploy -c swarmv2/deploy.yml react-app-production')
 }

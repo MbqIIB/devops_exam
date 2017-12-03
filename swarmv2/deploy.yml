@@ -4,6 +4,6 @@ services:
   main:
     image: josoder/devops_docker:latest
     ports:
-      - "8081:8081"
+      - "1337:5000"
     deploy:
       replicas: 3
