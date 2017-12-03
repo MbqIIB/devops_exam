@@ -1,11 +1,9 @@
 version: '3.1'
 
 services:
-
   main:
     image: josoder/devops_docker:latest
-      ports:
-        - "8081:8081"
-      deploy:
-        replicas: 3
-
+    ports:
+      - "8081:8081"
+    deploy:
+      replicas: 3
