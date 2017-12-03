@@ -25,7 +25,7 @@ node {
     
      sshagent (credentials: ['docker-manager']) {
         stage('publish'){
-            sh 'ssh -o StrictHostKeyChecking=no -l docker 18.195.155.52 docker service create --name react-app --publish 5000:5000/tcp josoder/devops_docker'
+            sh 'ssh -o StrictHostKeyChecking=no -l docker 52.29.132.137 docker service create --name react-app --publish 5000:5000/tcp josoder/devops_docker'
         }
     }
 }

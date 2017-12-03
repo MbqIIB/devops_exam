@@ -2,4 +2,3 @@
 localhost
 
 [jenkinsserver]
-18.195.110.237 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
