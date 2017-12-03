@@ -1,5 +1,0 @@
----
-- hosts: docker-swarm
-  sudo: True
-  roles:
-   - geerlingguy.docker

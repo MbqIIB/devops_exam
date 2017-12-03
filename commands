@@ -1,0 +1,49 @@
+First create a swarm on aws, can easily be done using the template in the following link:  
+https://docs.docker.com/docker-for-aws/#docker-community-edition-ce-for-aws
+
+
+swarm 1 automatic setup with ansible:
+
+ansible-playbook -i ./hosts create-ec2.yml
+
+ansible -m ping jenkinsserver
+
+ansible-playbook install_jenkins.yml
+
+
+install plugins and change the ip of the manager node in the publish stage 
+
+
+swarm 2
+
+master
+
+create a jenkins-master, 
+
+ssh -A -i "path of .pem" [ip to manager]
+
+curl -o jenkins.yml https://raw.githubusercontent.com/josoder/devops_exam/master/swarmv2/jenkins.yml
+
+echo "admin-user" | docker secret create jenkins-user -
+
+echo "admin-password" | docker secret create jenkins-pass -
+
+docker stack deploy -c jenkins.yml jenkins
+
+
+-slaves
+
+get ip to master(dns of the loadbalancer)
+
+curl -o jenkins-prod.yml https://raw.githubusercontent.com/josoder/devops_exam/master/swarmv2/jenkins-swarm-production.yml
+
+docker stack deploy -c jenkins-prod.yml prod-agent
+
+curl -o jenkins-test.yml https://raw.githubusercontent.com/josoder/devops_exam/master/swarmv2/jenkins-swarm-test-agent.yml
+
+docker stack deploy -c jenkins-test.yml test-agent
+
+echo "-master http://[jenkins-master-ip] -password xxx -username admin-user"|docker secret create jenkins-v1 -
+
+
+add github/docker-hub credentials
