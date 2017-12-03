@@ -1,0 +1,36 @@
+---
+-master
+
+ssh -A -i "devops/exam-jenkins.pem" 52.58.31.174
+
+curl -o jenkins.yml https://raw.githubusercontent.com/josoder/devops_exam/master/swarmv2/jenkins.yml
+
+echo "admin" | docker secret create jenkins-user -
+
+echo "admin" | docker secret create jenkins-pass -
+
+docker stack deploy -c jenkins.yml jenkins11111111111
+
+
+-slaves
+
+get ip to master
+
+sudo mkdir /workspace;sudo chmod 777 /workspace
+
+172.31.27.110
+
+curl -o jenkins-prod.yml https://raw.githubusercontent.com/josoder/devops_exam/master/swarmv2/jenkins-swarm-production.yml
+
+docker stack deploy -c jenkins-prod.yml prod-agent
+
+curl -o jenkins-test.yml https://raw.githubusercontent.com/josoder/devops_exam/master/swarmv2/jenkins-swarm-test-agent.yml
+
+docker stack deploy -c jenkins-test.yml test-agent
+
+echo "-master http://172.31.27.110 -password jocke123266 -username admin"|docker secret create jenkins-v1 -
+
+JENKINS_IP = 172.31.27.110
+MASTER_PASS = jocke123266
+
+add github/docker-hub credentials
