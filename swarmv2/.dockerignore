@@ -1,0 +1,6 @@
+.git
+jenkins.yml
+Jenkinsfile
+deploy.yml
+jenkins-swarm-test-agent.yml
+jenkins-swarm-production.yml
